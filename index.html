@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud Monitoring Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>☁️ Cloud Monitoring Dashboard</h1>
+</header>
+
+<nav>
+    <a href="#" onclick="showDashboard()">Dashboard</a>
+    <a href="#" onclick="showServers()">Servers</a>
+    <a href="#" onclick="showAnalytics()">Analytics</a>
+    <a href="#" onclick="showSupport()">Support</a>
+</nav>
+
+<div id="mainContent">
+
+<section class="summary">
+    <div class="card">
+        <h3>Total Servers</h3>
+        <p id="totalServers">4</p>
+    </div>
+    <div class="card">
+        <h3>Active Servers</h3>
+        <p id="activeServers">4</p>
+    </div>
+    <div class="card">
+        <h3>Total Savings</h3>
+        <p>₹5000</p>
+    </div>
+</section>
+
+<section class="server-form">
+    <h2>Add Server</h2>
+    <input type="text" id="name" placeholder="Server Name">
+    <input type="number" id="cost" placeholder="Cost">
+    <input type="number" id="cpu" placeholder="CPU Usage">
+    <button onclick="addServer()">Add</button>
+</section>
+
+<section class="server-list">
+    <h2>Server List</h2>
+    <ul id="serverList"></ul>
+</section>
+
+</div>
+
+<!-- Analytics Section -->
+<section id="analyticsSection" class="extra-section">
+    <h2>📊 Analytics Report</h2>
+    <p>Total Servers Monitored: <span id="analyticsTotal">4</span></p>
+    <p>Active Servers: <span id="analyticsActive">4</span></p>
+    <p>System Health: Excellent</p>
+    <p>Last Updated: Just Now</p>
+</section>
+
+<!-- Support Section -->
+<section id="supportSection" class="extra-section">
+    <h2>🛠 Support Center</h2>
+    <p>Email: support@cloudmonitor.com</p>
+    <p>Phone: +91 98765 43210</p>
+    <p>Working Hours: 9 AM - 6 PM</p>
+</section>
+
+<footer>
+    <p>© 2026 Cloud Monitoring Project</p>
+</footer>
+
+<script>
+let servers = [];
+
+function addServer() {
+    const name = document.getElementById("name").value;
+    const cost = document.getElementById("cost").value;
+    const cpu = document.getElementById("cpu").value;
+
+    if (!name || !cost || !cpu) return alert("Fill all fields");
+
+    const server = { name, cost, cpu };
+    servers.push(server);
+
+    const li = document.createElement("li");
+    li.textContent = `${name} | Cost: ₹${cost} | CPU: ${cpu}%`;
+    document.getElementById("serverList").appendChild(li);
+
+    updateCounts();
+}
+
+function updateCounts() {
+    document.getElementById("totalServers").textContent = servers.length;
+    document.getElementById("activeServers").textContent = servers.length;
+    document.getElementById("analyticsTotal").textContent = servers.length;
+    document.getElementById("analyticsActive").textContent = servers.length;
+}
+
+function showAnalytics() {
+    document.getElementById("mainContent").style.display = "none";
+    document.getElementById("supportSection").style.display = "none";
+    document.getElementById("analyticsSection").style.display = "block";
+}
+
+function showSupport() {
+    document.getElementById("mainContent").style.display = "none";
+    document.getElementById("analyticsSection").style.display = "none";
+    document.getElementById("supportSection").style.display = "block";
+}
+
+function showDashboard() {
+    document.getElementById("mainContent").style.display = "block";
+    document.getElementById("analyticsSection").style.display = "none";
+    document.getElementById("supportSection").style.display = "none";
+}
+
+function showServers() {
+    showDashboard();
+}
+</script>
+
+</body>
+</html>
